@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
+	http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="ConexionPostgres"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>pe.com.surti.entity.Menu</class>
+		<class>pe.com.surti.entity.MenuPerfil</class>
+		<class>pe.com.surti.entity.Notificacion</class>
+		<class>pe.com.surti.entity.Organizacion</class>
+		<class>pe.com.surti.entity.Parametro</class>
+		<class>pe.com.surti.entity.Perfil</class>
+		<class>pe.com.surti.entity.Sesion</class>
+		<class>pe.com.surti.entity.Usuario</class>
+		<class>pe.com.surti.entity.UsuarioPerfil</class>
+		<properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+        </properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p">
+
+    <context:annotation-config />
+    
+    <!-- enable @Transactional Annotation --> 
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <!-- scans packages to find and register beans within the application context. -->
+    <context:component-scan
+        base-package="pe.com.surti.controller, pe.com.surti.dao.postgres, 
+        pe.com.surti.service.impl" />
+    
+    <!--  classpath*:*.properties-->
+    <context:property-placeholder location="classpath:database.properties" />
+    
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close"
+		p:driverClassName="${db.driverClassName}"
+        p:url="${db.url}"
+        p:username="${db.username}"
+        p:password="${db.password}">
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:persistenceUnitName="${em.persistenceUnitName}"
+        p:packagesToScan="${em.packagesToScan}">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+</beans>

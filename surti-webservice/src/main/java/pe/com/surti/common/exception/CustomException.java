@@ -1,0 +1,15 @@
+package pe.com.surti.common.exception;
+
+/**
+ * Excepciones personalizadas
+ * 
+ * @author wcahuaya
+ */
+public class CustomException extends Exception {
+
+	private static final long serialVersionUID = 700L;
+
+	public CustomException(String mensaje) {
+		super(mensaje);
+	}
+}
