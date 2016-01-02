@@ -129,6 +129,18 @@
 			<version>${c3p0.version}</version>
 		</dependency>
 
+		<!-- Librerias de jackson -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.7.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.7.4</version>
+		</dependency>
+
 		<!-- Control de log4j -->
 		<dependency>
 			<groupId>log4j</groupId>

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.surti.common.exception.CustomException;
 import pe.com.surti.controller.json.JsonUsuario;
 import pe.com.surti.controller.request.ObtenerDatosUsuarioRequest;
 import pe.com.surti.controller.response.ObtenerDatosUsuarioResponse;
@@ -22,19 +21,24 @@ public class LogueoController {
 	private ConsultaService consultaService;
 
 	@RequestMapping(value = "/obtenerUsuarioPorLogo", method = RequestMethod.POST)
-	public ObtenerDatosUsuarioResponse obtenerUsuarioPorLogo(String username) {
+	public ObtenerDatosUsuarioResponse obtenerUsuarioPorLogo(ObtenerDatosUsuarioRequest request) {
 		log.debug("Inicio de proceso Rest");
 		ObtenerDatosUsuarioResponse response;
 		Usuario usuario;
 
 		response = new ObtenerDatosUsuarioResponse();
-		try {
-			usuario = consultaService.obtenerUsuarioPorLogo(username);
+//		try {
+//			usuario = consultaService.obtenerUsuarioPorLogo(request.getUsername());
+		  usuario = new Usuario();
+		  usuario.setIdUsuario(1);
+		  usuario.setNombreCompleto("nombreCompleto");
+		  System.out.println("USERNAME RECIBIDO: " + request.getUsername());
+		  usuario.setUsername(request.getUsername());
 			response.setJsonUsuario(formatearJson(usuario));
 			log.debug("Respuesta [" + response + "]");
-		} catch (CustomException e) {
-			e.printStackTrace();
-		}
+//		} catch (CustomException e) {
+//			e.printStackTrace();
+//		}
 
 		return response;
 	}
