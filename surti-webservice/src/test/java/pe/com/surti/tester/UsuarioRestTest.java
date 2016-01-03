@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pe.com.surti.common.exception.CustomException;
 import pe.com.surti.controller.ListaUsuarioController;
 import pe.com.surti.controller.LogueoController;
+import pe.com.surti.controller.request.ObtenerDatosUsuarioRequest;
 import pe.com.surti.controller.response.ObtenerDatosUsuarioResponse;
 import pe.com.surti.controller.response.ObtenerListaUsuarioResponse;
 
@@ -30,7 +31,9 @@ public class UsuarioRestTest {
 	
 	private void obtenerUsuarioPorLogo() throws CustomException {
 		ObtenerDatosUsuarioResponse response;
-		response = lc.obtenerUsuarioPorLogo("WCAHUAYA");
+		ObtenerDatosUsuarioRequest request = new ObtenerDatosUsuarioRequest();
+		request.setUsername("WCAHUAYA");
+		response = lc.obtenerUsuarioPorLogo(request);
 	}
 	
 	private void ObtenerListaUsuarioResponse() throws CustomException {

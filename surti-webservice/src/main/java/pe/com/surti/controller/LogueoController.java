@@ -2,6 +2,7 @@ package pe.com.surti.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class LogueoController {
 	private ConsultaService consultaService;
 
 	@RequestMapping(value = "/obtenerUsuarioPorLogo", method = RequestMethod.POST)
-	public ObtenerDatosUsuarioResponse obtenerUsuarioPorLogo(ObtenerDatosUsuarioRequest request) {
+	public ObtenerDatosUsuarioResponse obtenerUsuarioPorLogo(@RequestBody ObtenerDatosUsuarioRequest request) {
 		log.debug("Inicio de proceso Rest");
 		ObtenerDatosUsuarioResponse response;
 		Usuario usuario;

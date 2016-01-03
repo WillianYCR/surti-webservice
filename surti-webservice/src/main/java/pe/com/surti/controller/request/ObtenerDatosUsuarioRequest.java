@@ -1,10 +1,6 @@
 package pe.com.surti.controller.request;
 
-import java.io.Serializable;
-
-public class ObtenerDatosUsuarioRequest implements Serializable {
-
-  private static final long serialVersionUID = 1L;
+public class ObtenerDatosUsuarioRequest {
 
   private String username;
 
