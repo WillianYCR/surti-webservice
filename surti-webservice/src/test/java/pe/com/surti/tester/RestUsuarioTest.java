@@ -14,7 +14,10 @@ import pe.com.surti.controller.response.ObtenerDatosUsuarioResponse;
 import pe.com.surti.controller.response.ObtenerListaUsuarioResponse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-context.xml")
+@ContextConfiguration(locations = {"classpath:spring-context.xml"})
+//@ContextConfiguration(locations = {
+//	    "classpath:spring-context.xml",
+//	    "classpath:spring-dispatcher-servlet.xml" })
 public class RestUsuarioTest {
 
 	@Autowired
@@ -31,15 +34,9 @@ public class RestUsuarioTest {
 
 	private void obtenerUsuarioPorLogo() throws CustomException {
 		ObtenerDatosUsuarioResponse response;
-<<<<<<< HEAD:surti-webservice/src/test/java/pe/com/surti/tester/RestUsuarioTest.java
-		ObtenerDatosUsuarioRequest oud = new ObtenerDatosUsuarioRequest();
-		oud.setUsername("WCAHUAYA");
-		response = lc.obtenerUsuarioPorLogo(oud);
-=======
 		ObtenerDatosUsuarioRequest request = new ObtenerDatosUsuarioRequest();
 		request.setUsername("WCAHUAYA");
 		response = lc.obtenerUsuarioPorLogo(request);
->>>>>>> 87a16774eff4a277a3124c901b5f41765bc6de7f:surti-webservice/src/test/java/pe/com/surti/tester/UsuarioRestTest.java
 	}
 
 	private void ObtenerListaUsuarioResponse() throws CustomException {

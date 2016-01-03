@@ -133,12 +133,12 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.4.3</version>
+			<version>2.6.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.4.3</version>
+			<version>2.6.4</version>
 		</dependency>
 
 		<!-- Control de log4j -->
@@ -156,22 +156,13 @@
 			<scope>test</scope>
 		</dependency>
 
-<<<<<<< HEAD
+		<!-- API para los Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
+			<scope>provided</scope>
 		</dependency>
-=======
-		<!-- API para los Servlet  -->
-	<dependency>
-		<groupId>javax.servlet</groupId>
-		<artifactId>javax.servlet-api</artifactId>
-		<version>3.0.1</version>
-		<scope>provided</scope>
-	</dependency>
->>>>>>> 87a16774eff4a277a3124c901b5f41765bc6de7f
-
 	</dependencies>
 
 	<build>
