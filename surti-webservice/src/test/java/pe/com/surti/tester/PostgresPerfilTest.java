@@ -12,27 +12,34 @@ import pe.com.surti.service.ConsultaService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-context.xml")
-public class MenuPerfilPostgresTest {
-	private final static Logger log = Logger.getLogger(MenuPerfilPostgresTest.class.getName());
+public class PostgresPerfilTest {
+
+	private final static Logger log = Logger
+			.getLogger(PostgresPerfilTest.class.getName());
 	
 	@Autowired
 	private ConsultaService consultaService;
-	
+
 	@Test
-	public void test(){
+	public void test() {
 		try {
-			obtenerListaMenuPerfil();	
-			obtenerMenuPerfilPorId();
+			// obtenerListaPerfil();
+			obtenerPerfilPorDescripcion();
+			obtenerPerfilPorAbreviacion();
 		} catch (Exception e) {
-			log.error("No se pudo obtner la lista de usuarios: " + e);
+			log.error(e);
 		}
 	}
-	
-	private void obtenerListaMenuPerfil() throws CustomException {
-		consultaService.obtenerListaMenuPerfil();
+
+	private void obtenerListaPerfil() throws CustomException {
+		consultaService.obtenerListaPerfil();
 	}
-	
-	private void obtenerMenuPerfilPorId() throws CustomException {
-		consultaService.obtenerMenuPerfilPorId("2");
+
+	private void obtenerPerfilPorDescripcion() throws CustomException {
+		consultaService.obtenerPerfilPorDescripcion("SISTEMAS");
+	}
+
+	private void obtenerPerfilPorAbreviacion() throws CustomException {
+		consultaService.obtenerPerfilPorAbreviacion("ADM");
 	}
 }

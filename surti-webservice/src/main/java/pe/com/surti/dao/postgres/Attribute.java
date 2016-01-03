@@ -90,4 +90,29 @@ public interface Attribute {
 		String estado = "mp.\"estado\"";
 		String MP = "mp.";
 	}
+	
+	interface Sesion{
+		String SESION = "\"SESION\" s ";
+		String idSesion = "s.\"idSesion\"";
+		String idUsuario = "s.\"idUsuario\"";
+		String token = "s.\"token\"";
+		String fechaIngreso = "s.\"fechaIngreso\"";
+		String fechaFin = "s.\"fechaFin\"";
+		String estadoLogico = "s.\"estadoLogico\"";
+		String S = "s.";
+	}
+	
+	interface Notificacion{
+		String NOTIFICACION = "\"NOTIFICACION\" n ";
+		String idNotificacion = "n.\"idNotificacion\"";
+		String remitente = "n.\"remitente\"";
+		String destinatario = "n.\"destinatario\"";
+		String asunto = "n.\"asunto\"";
+		String fechaEnvio = "n.\"fechaEnvio\"";
+		String contenido = "n.\"contenido\"";
+		String link = "n.\"link\"";
+		String estadoNotificacion = "n.\"estadoNotificacion\"";
+		String estadoLogico = "n.\"estadoLogico\"";
+		String N = "n.";
+	}
 }

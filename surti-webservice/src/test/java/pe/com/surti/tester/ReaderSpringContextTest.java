@@ -5,7 +5,7 @@ import org.junit.Test;
 import pe.com.surti.app.ConexionManager;
 import pe.com.surti.common.exception.CustomException;
 
-public class SpringContextTest {
+public class ReaderSpringContextTest {
 	@Test
 	public void test() throws CustomException {
 		ConexionManager.startConexionSystem();

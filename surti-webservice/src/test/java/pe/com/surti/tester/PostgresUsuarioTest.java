@@ -13,47 +13,47 @@ import pe.com.surti.service.ConsultaService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-context.xml")
-public class UsuarioPostgresTest {
-	private final static Logger log = Logger.getLogger(UsuarioPostgresTest.class.getName());
-	
+public class PostgresUsuarioTest {
+	private final static Logger log = Logger
+			.getLogger(PostgresUsuarioTest.class.getName());
+
 	@Autowired
 	private ConsultaService consultaService;
-	
+
 	@Test
-	public void test(){
+	public void test() {
 		try {
-			//insertarUsuario();
+			// insertarUsuario();
 			modificarUsuario();
-			obtenerListaUsuario();	
+			obtenerListaUsuario();
 			obtenerUsuarioPorLogo();
 			obtenerUsuarioPorDni();
 		} catch (Exception e) {
-			log.error("No se pudo obtner la lista de usuarios: " + e);
+			log.error(e);
 		}
 	}
-	
+
 	private void insertarUsuario() throws CustomException {
 		consultaService.insertarUsuario(modelo());
 	}
-	
+
 	private void modificarUsuario() throws CustomException {
-		//consultaService.modificarUsuario(modelo());
+		// consultaService.modificarUsuario(modelo());
 	}
-	
+
 	private void obtenerListaUsuario() throws CustomException {
 		consultaService.obtenerListaUsuario();
 	}
-	
+
 	private void obtenerUsuarioPorLogo() throws CustomException {
 		consultaService.obtenerUsuarioPorLogo("WCAHUAYA");
 	}
-	
+
 	private void obtenerUsuarioPorDni() throws CustomException {
 		consultaService.obtenerUsuarioPorDni("45656544");
 	}
-	
-	
-	private Usuario modelo(){
+
+	private Usuario modelo() {
 		int id = 8;
 		Usuario u = new Usuario();
 		u.setIdUsuario(id);

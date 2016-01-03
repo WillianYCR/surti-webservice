@@ -19,17 +19,16 @@ import pe.com.surti.entity.UsuarioPerfil;
 public class PostgresUsuarioPerfilDao extends BaseDatoCrudPersistence implements
 		UsuarioPerfilDao {
 
-	private static final Logger logPostgres = Logger.getLogger(PostgresUsuarioPerfilDao.class
-			.getName());
+	private static final Logger logPostgres = Logger
+			.getLogger(PostgresUsuarioPerfilDao.class.getName());
 
 	@Override
 	public UsuarioPerfil insertarUsuarioPerfil(UsuarioPerfil usuarioPerfil)
 			throws CustomException {
-		logPostgres.debug("Inicio");
-		UsuarioPerfil userPerf = new UsuarioPerfil();
-		userPerf = create(usuarioPerfil);
-		logPostgres.debug("Satisfactorio: UsuarioPerfil = " + userPerf);
-		return userPerf;
+		UsuarioPerfil obj = new UsuarioPerfil();
+		obj = create(usuarioPerfil);
+		logPostgres.debug("SATISFACTORIO: " + obj);
+		return obj;
 	}
 
 	@Override
@@ -42,25 +41,23 @@ public class PostgresUsuarioPerfilDao extends BaseDatoCrudPersistence implements
 	@Override
 	public List<UsuarioPerfil> obtenerListaUsuarioPerfil()
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		CriteriaQuery<UsuarioPerfil> cq;
 		Root<UsuarioPerfil> root;
-		List<UsuarioPerfil> lup;
+		List<UsuarioPerfil> lista;
 
 		builder = getEm().getCriteriaBuilder();
 		cq = builder.createQuery(UsuarioPerfil.class);
 		root = cq.from(UsuarioPerfil.class);
 		cq.select(root);
-		lup = getEm().createQuery(cq).getResultList();
+		lista = getEm().createQuery(cq).getResultList();
 
-		logPostgres.debug("Satisfactorio: Cantidad = " + lup.size());
-		return lup;
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
+		return lista;
 	}
 
 	@Override
 	public List<UsuarioPerfil> obtenerListaUsuarioPerfilPorIdUsuario(
 			String idUsuario) throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryUsuarioPerfilPorIdUsuario(idUsuario);
@@ -71,7 +68,6 @@ public class PostgresUsuarioPerfilDao extends BaseDatoCrudPersistence implements
 	@Override
 	public List<UsuarioPerfil> obtenerListaUsuarioPerfilPorIdPerfil(
 			String idPerfil) throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryUsuarioPerfilPorIdPerfil(idPerfil);
@@ -82,7 +78,6 @@ public class PostgresUsuarioPerfilDao extends BaseDatoCrudPersistence implements
 	@Override
 	public UsuarioPerfil obtenerUsuarioPerfilPorId(String idUsuarioPerfil)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryUsuarioPerfilPorId(idUsuarioPerfil);
@@ -97,7 +92,7 @@ public class PostgresUsuarioPerfilDao extends BaseDatoCrudPersistence implements
 	private void queryUsuarioPerfilPorIdPerfil(String idPerfil) {
 		queryBusqueda("idPerfil", idPerfil);
 	}
-	
+
 	private void queryUsuarioPerfilPorId(String idUsuarioPerfil) {
 		queryBusqueda("idUsuarioPerfil", idUsuarioPerfil);
 	}
@@ -110,20 +105,23 @@ public class PostgresUsuarioPerfilDao extends BaseDatoCrudPersistence implements
 		query = null;
 		StringBuilder sql = new StringBuilder();
 		sql.append(Attribute.Sql.Select);
-		sql.append(Attribute.UsuarioPerfil.idUsuarioPerfil).append(Attribute.Sql.Coma);
-		sql.append(Attribute.UsuarioPerfil.idUsuario).append(Attribute.Sql.Coma);
+		sql.append(Attribute.UsuarioPerfil.idUsuarioPerfil).append(
+				Attribute.Sql.Coma);
+		sql.append(Attribute.UsuarioPerfil.idUsuario)
+				.append(Attribute.Sql.Coma);
 		sql.append(Attribute.UsuarioPerfil.idPerfil).append(Attribute.Sql.Coma);
-		sql.append(Attribute.UsuarioPerfil.estado).append(Attribute.Sql.Espacio);
+		sql.append(Attribute.UsuarioPerfil.estado)
+				.append(Attribute.Sql.Espacio);
 		sql.append(Attribute.Sql.From);
 		sql.append(Attribute.UsuarioPerfil.USUARIO_PERFIL);
 		sql.append(Attribute.Sql.Where);
 		sql.append(Attribute.UsuarioPerfil.UP);
-		sql.append(Attribute.Sql.ComillaDoble).append(condicion).
-		append(Attribute.Sql.ComillaDoble);
+		sql.append(Attribute.Sql.ComillaDoble).append(condicion)
+				.append(Attribute.Sql.ComillaDoble);
 		sql.append(Attribute.Sql.Igual).append(valor);
 		sql.append(Attribute.Sql.Comilla);
 		query = sql.toString();
-		logPostgres.debug(query);
+		logPostgres.debug("QUERY GENERADO: " + query);
 	}
 
 	private List<UsuarioPerfil> formatearLista(List<Object[]> results) {
@@ -139,10 +137,8 @@ public class PostgresUsuarioPerfilDao extends BaseDatoCrudPersistence implements
 				lista.add(obj);
 			}
 		}
-		logPostgres.debug("Cantidad de registros = " + lista.size());
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
 		return lista;
 	}
-
-	
 
 }

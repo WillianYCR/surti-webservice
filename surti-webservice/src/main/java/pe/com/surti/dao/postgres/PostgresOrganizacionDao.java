@@ -19,19 +19,17 @@ import pe.com.surti.entity.Organizacion;
 public class PostgresOrganizacionDao extends BaseDatoCrudPersistence implements
 		OrganizacionDao {
 
-	private static final Logger logPostgres = Logger.getLogger(PostgresOrganizacionDao.class
-			.getName());
+	private static final Logger logPostgres = Logger
+			.getLogger(PostgresOrganizacionDao.class.getName());
 
 	@Override
 	public Organizacion insertarOrganizacion(Organizacion organizacion)
 			throws CustomException {
-		logPostgres.debug("Inicio");
-		Organizacion org = new Organizacion();
-		org = create(organizacion);
-		logPostgres.debug("Satisfactorio: UsuarioPerfil = " + org);
-		return org;
+		Organizacion obj = new Organizacion();
+		obj = create(organizacion);
+		logPostgres.debug("SATISFACTORIO: " + obj);
+		return obj;
 	}
-
 
 	@Override
 	public Organizacion modificarOrganizacion(Organizacion organizacion)
@@ -40,36 +38,32 @@ public class PostgresOrganizacionDao extends BaseDatoCrudPersistence implements
 		return null;
 	}
 
-
 	@Override
 	public List<Organizacion> obtenerListaOrganizacion() throws CustomException {
-		logPostgres.debug("Inicio");
 		CriteriaQuery<Organizacion> cq;
 		Root<Organizacion> root;
-		List<Organizacion> lo;
+		List<Organizacion> lista;
 
 		builder = getEm().getCriteriaBuilder();
 		cq = builder.createQuery(Organizacion.class);
 		root = cq.from(Organizacion.class);
 		cq.select(root);
-		lo = getEm().createQuery(cq).getResultList();
+		lista = getEm().createQuery(cq).getResultList();
 
-		logPostgres.debug("Satisfactorio: Cantidad = " + lo.size());
-		return lo;
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
+		return lista;
 	}
-
 
 	@Override
 	public Organizacion obtenerOrganizacionPorId(String idOrganizacion)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryOrganizacionPorId(idOrganizacion);
 		results = getEm().createNativeQuery(query).getResultList();
 		return formatearEntidad(results);
 	}
-	
+
 	private void queryOrganizacionPorId(String idOrganizacion) {
 		queryBusqueda("idOrganizacion", idOrganizacion);
 	}
@@ -82,10 +76,14 @@ public class PostgresOrganizacionDao extends BaseDatoCrudPersistence implements
 		query = null;
 		StringBuilder sql = new StringBuilder();
 		sql.append(Attribute.Sql.Select);
-		sql.append(Attribute.Organizacion.idOrganizacion).append(Attribute.Sql.Coma);
-		sql.append(Attribute.Organizacion.descripcion).append(Attribute.Sql.Coma);
-		sql.append(Attribute.Organizacion.descripcionSocial).append(Attribute.Sql.Coma);
-		sql.append(Attribute.Organizacion.descripcionComercial).append(Attribute.Sql.Coma);
+		sql.append(Attribute.Organizacion.idOrganizacion).append(
+				Attribute.Sql.Coma);
+		sql.append(Attribute.Organizacion.descripcion).append(
+				Attribute.Sql.Coma);
+		sql.append(Attribute.Organizacion.descripcionSocial).append(
+				Attribute.Sql.Coma);
+		sql.append(Attribute.Organizacion.descripcionComercial).append(
+				Attribute.Sql.Coma);
 		sql.append(Attribute.Organizacion.ruc).append(Attribute.Sql.Coma);
 		sql.append(Attribute.Organizacion.direccion).append(Attribute.Sql.Coma);
 		sql.append(Attribute.Organizacion.telefono).append(Attribute.Sql.Coma);
@@ -96,12 +94,12 @@ public class PostgresOrganizacionDao extends BaseDatoCrudPersistence implements
 		sql.append(Attribute.Organizacion.ORGANIZACION);
 		sql.append(Attribute.Sql.Where);
 		sql.append(Attribute.Organizacion.O);
-		sql.append(Attribute.Sql.ComillaDoble).append(condicion).
-		append(Attribute.Sql.ComillaDoble);
+		sql.append(Attribute.Sql.ComillaDoble).append(condicion)
+				.append(Attribute.Sql.ComillaDoble);
 		sql.append(Attribute.Sql.Igual).append(valor);
 		sql.append(Attribute.Sql.Comilla);
 		query = sql.toString();
-		logPostgres.debug(query);
+		logPostgres.debug("QUERY GENERADO: " + query);
 	}
 
 	private List<Organizacion> formatearLista(List<Object[]> results) {
@@ -112,8 +110,10 @@ public class PostgresOrganizacionDao extends BaseDatoCrudPersistence implements
 				obj = new Organizacion();
 				obj.setIdOrganizacion((Integer.parseInt(res[0].toString())));
 				obj.setDescripcion(res[1] == null ? "" : res[1].toString());
-				obj.setDescripcionSocial(res[2] == null ? "" : res[2].toString());
-				obj.setDescripcionComercial(res[3] == null ? "" : res[3].toString());
+				obj.setDescripcionSocial(res[2] == null ? "" : res[2]
+						.toString());
+				obj.setDescripcionComercial(res[3] == null ? "" : res[3]
+						.toString());
 				obj.setRuc(res[4] == null ? "" : res[4].toString());
 				obj.setDireccion(res[5] == null ? "" : res[5].toString());
 				obj.setTelefono(res[6] == null ? "" : res[6].toString());
@@ -123,13 +123,8 @@ public class PostgresOrganizacionDao extends BaseDatoCrudPersistence implements
 				lista.add(obj);
 			}
 		}
-		logPostgres.debug("Cantidad de registros = " + lista.size());
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
 		return lista;
 	}
-
-
-	
-
-	
 
 }

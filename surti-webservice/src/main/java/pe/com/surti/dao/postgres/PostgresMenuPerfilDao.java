@@ -13,45 +13,41 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.com.surti.common.exception.CustomException;
 import pe.com.surti.dao.MenuPerfilDao;
 import pe.com.surti.entity.MenuPerfil;
-import pe.com.surti.entity.UsuarioPerfil;
 
 @Transactional
 @Repository
 public class PostgresMenuPerfilDao extends BaseDatoCrudPersistence implements
 		MenuPerfilDao {
 
-	private static final Logger logPostgres = Logger.getLogger(PostgresMenuPerfilDao.class
-			.getName());
+	private static final Logger logPostgres = Logger
+			.getLogger(PostgresMenuPerfilDao.class.getName());
 
 	@Override
 	public List<MenuPerfil> obtenerListaMenuPerfil() throws CustomException {
-		logPostgres.debug("Inicio");
 		CriteriaQuery<MenuPerfil> cq;
 		Root<MenuPerfil> root;
-		List<MenuPerfil> lmp;
+		List<MenuPerfil> lista;
 
 		builder = getEm().getCriteriaBuilder();
 		cq = builder.createQuery(MenuPerfil.class);
 		root = cq.from(MenuPerfil.class);
 		cq.select(root);
-		lmp = getEm().createQuery(cq).getResultList();
+		lista = getEm().createQuery(cq).getResultList();
 
-		logPostgres.debug("Satisfactorio: Cantidad = " + lmp.size());
-		return lmp;
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
+		return lista;
 	}
-
 
 	@Override
 	public MenuPerfil obtenerMenuPerfilPorId(String idMenuPerfil)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryMenuPerfilPorId(idMenuPerfil);
 		results = getEm().createNativeQuery(query).getResultList();
 		return formatearEntidad(results);
 	}
-	
+
 	private void queryMenuPerfilPorId(String idMenuPerfil) {
 		queryBusqueda("idMenuPerfil", idMenuPerfil);
 	}
@@ -64,7 +60,8 @@ public class PostgresMenuPerfilDao extends BaseDatoCrudPersistence implements
 		query = null;
 		StringBuilder sql = new StringBuilder();
 		sql.append(Attribute.Sql.Select);
-		sql.append(Attribute.MenuPerfil.idMenuPerfil).append(Attribute.Sql.Coma);
+		sql.append(Attribute.MenuPerfil.idMenuPerfil)
+				.append(Attribute.Sql.Coma);
 		sql.append(Attribute.MenuPerfil.idMenu).append(Attribute.Sql.Coma);
 		sql.append(Attribute.MenuPerfil.idPerfil).append(Attribute.Sql.Coma);
 		sql.append(Attribute.MenuPerfil.estado).append(Attribute.Sql.Espacio);
@@ -72,12 +69,12 @@ public class PostgresMenuPerfilDao extends BaseDatoCrudPersistence implements
 		sql.append(Attribute.MenuPerfil.MENU_PERFIL);
 		sql.append(Attribute.Sql.Where);
 		sql.append(Attribute.MenuPerfil.MP);
-		sql.append(Attribute.Sql.ComillaDoble).append(condicion).
-		append(Attribute.Sql.ComillaDoble);
+		sql.append(Attribute.Sql.ComillaDoble).append(condicion)
+				.append(Attribute.Sql.ComillaDoble);
 		sql.append(Attribute.Sql.Igual).append(valor);
 		sql.append(Attribute.Sql.Comilla);
 		query = sql.toString();
-		logPostgres.debug(query);
+		logPostgres.debug("QUERY GENERADO: " + query);
 	}
 
 	private List<MenuPerfil> formatearLista(List<Object[]> results) {
@@ -93,13 +90,8 @@ public class PostgresMenuPerfilDao extends BaseDatoCrudPersistence implements
 				lista.add(obj);
 			}
 		}
-		logPostgres.debug("Cantidad de registros = " + lista.size());
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
 		return lista;
 	}
-
-
-	
-
-	
 
 }

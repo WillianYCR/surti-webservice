@@ -19,49 +19,44 @@ import pe.com.surti.entity.Usuario;
 public class PostgresUsuarioDao extends BaseDatoCrudPersistence implements
 		UsuarioDao {
 
-	private static final Logger logPostgres = Logger.getLogger(PostgresUsuarioDao.class
-			.getName());
+	private static final Logger logPostgres = Logger
+			.getLogger(PostgresUsuarioDao.class.getName());
 
-	
 	@Override
 	public Usuario insertarUsuario(Usuario usuario) throws CustomException {
-		logPostgres.debug("Inicio");
-		Usuario user = new Usuario();
-		user = create(usuario);
-		logPostgres.debug("Satisfactorio: Usuario = " + user);
-		return user;
+		Usuario obj = new Usuario();
+		obj = create(usuario);
+		logPostgres.debug("SATISFACTORIO: " + obj);
+		return obj;
 	}
 
 	@Override
 	public Usuario modificarUsuario(Usuario usuario) throws CustomException {
-		logPostgres.debug("Inicio");
-		Usuario user = new Usuario();
-		user = update(usuario);
-		logPostgres.debug("Satisfactorio: Usuario = " + user);
-		return user;
+		Usuario obj = new Usuario();
+		obj = update(usuario);
+		logPostgres.debug("SATISFACTORIO: " + obj);
+		return obj;
 	}
-	
+
 	@Override
 	public List<Usuario> obtenerListaUsuario() throws CustomException {
-		logPostgres.debug("Inicio");
 		CriteriaQuery<Usuario> cq;
 		Root<Usuario> root;
-		List<Usuario> lp;
+		List<Usuario> lista;
 
 		builder = getEm().getCriteriaBuilder();
 		cq = builder.createQuery(Usuario.class);
 		root = cq.from(Usuario.class);
 		cq.select(root);
-		lp = getEm().createQuery(cq).getResultList();
+		lista = getEm().createQuery(cq).getResultList();
 
-		logPostgres.debug("Satisfactorio: Cantidad = " + lp.size());
-		return lp;
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
+		return lista;
 	}
 
 	@Override
 	public Usuario obtenerUsuarioPorLogo(String logoUsuario)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryUsuarioPorLogo(logoUsuario);
@@ -72,7 +67,6 @@ public class PostgresUsuarioDao extends BaseDatoCrudPersistence implements
 	@Override
 	public Usuario obtenerUsuarioPorDni(String dniUsuario)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryUsuarioPorDni(dniUsuario);
@@ -110,7 +104,7 @@ public class PostgresUsuarioDao extends BaseDatoCrudPersistence implements
 		sql.append(Attribute.Sql.Igual).append(valor);
 		sql.append(Attribute.Sql.Comilla);
 		query = sql.toString();
-		logPostgres.debug(query);
+		logPostgres.debug("QUERY GENERADO: " + query);
 	}
 
 	private List<Usuario> formatearLista(List<Object[]> results) {
@@ -129,7 +123,7 @@ public class PostgresUsuarioDao extends BaseDatoCrudPersistence implements
 				lista.add(obj);
 			}
 		}
-		logPostgres.debug("Cantidad de registros = " + lista.size());
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
 		return lista;
 	}
 

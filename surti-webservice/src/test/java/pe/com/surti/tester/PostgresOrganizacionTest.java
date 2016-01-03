@@ -13,42 +13,42 @@ import pe.com.surti.service.ConsultaService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-context.xml")
-public class OrganizacionPostgresTest {
-	private final static Logger log = Logger.getLogger(OrganizacionPostgresTest.class.getName());
-	
+public class PostgresOrganizacionTest {
+	private final static Logger log = Logger
+			.getLogger(PostgresOrganizacionTest.class.getName());
+
 	@Autowired
 	private ConsultaService consultaService;
-	
+
 	@Test
-	public void test(){
+	public void test() {
 		try {
-			//insertarOrganizacion();
+			// insertarOrganizacion();
 			modificarOrganizacion();
 			obtenerListaOrganizacion();
 			obtenerOrganizacionPorId();
 		} catch (Exception e) {
-			log.error("No se pudo obtner la lista de usuarios: " + e);
+			log.error(e);
 		}
 	}
-	
+
 	private void insertarOrganizacion() throws CustomException {
 		consultaService.insertarOrganizacion(modelo());
 	}
-	
+
 	private void modificarOrganizacion() throws CustomException {
-		//consultaService.modificarOrganizacion(modelo());
+		// consultaService.modificarOrganizacion(modelo());
 	}
-	
+
 	private void obtenerListaOrganizacion() throws CustomException {
 		consultaService.obtenerListaOrganizacion();
 	}
-	
+
 	private void obtenerOrganizacionPorId() throws CustomException {
 		consultaService.obtenerOrganizacionPorId("1");
 	}
-	
-	
-	private Organizacion modelo(){
+
+	private Organizacion modelo() {
 		int id = 3;
 		Organizacion up = new Organizacion();
 		up.setIdOrganizacion(id);

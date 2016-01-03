@@ -13,52 +13,52 @@ import pe.com.surti.service.ConsultaService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-context.xml")
-public class UsuarioPerfilPostgresTest {
-	private final static Logger log = Logger.getLogger(UsuarioPerfilPostgresTest.class.getName());
-	
+public class PostgresUsuarioPerfilTest {
+	private final static Logger log = Logger
+			.getLogger(PostgresUsuarioPerfilTest.class.getName());
+
 	@Autowired
 	private ConsultaService consultaService;
-	
+
 	@Test
-	public void test(){
+	public void test() {
 		try {
-			//insertarUsuarioPerfil();
+			// insertarUsuarioPerfil();
 			modificarUsuarioPerfil();
-			obtenerListaUsuarioPerfil();	
+			obtenerListaUsuarioPerfil();
 			obtenerUsuarioPerfilPorIdUsuario();
 			obtenerUsuarioPerfilPorIdPerfil();
 			obtenerUsuarioPerfilPorId();
 		} catch (Exception e) {
-			log.error("No se pudo obtner la lista de usuarios: " + e);
+			log.error(e);
 		}
 	}
-	
+
 	private void insertarUsuarioPerfil() throws CustomException {
 		consultaService.insertarUsuarioPerfil(modelo());
 	}
-	
+
 	private void modificarUsuarioPerfil() throws CustomException {
-		//consultaService.modificarUsuarioPerfil(modelo());
+		// consultaService.modificarUsuarioPerfil(modelo());
 	}
-	
+
 	private void obtenerListaUsuarioPerfil() throws CustomException {
 		consultaService.obtenerListaUsuarioPerfil();
 	}
-	
+
 	private void obtenerUsuarioPerfilPorIdUsuario() throws CustomException {
 		consultaService.obtenerListaUsuarioPerfilPorIdUsuario("4");
 	}
-	
+
 	private void obtenerUsuarioPerfilPorIdPerfil() throws CustomException {
 		consultaService.obtenerListaUsuarioPerfilPorIdPerfil("2");
 	}
-	
+
 	private void obtenerUsuarioPerfilPorId() throws CustomException {
 		consultaService.obtenerUsuarioPerfilPorId("2");
 	}
-	
-	
-	private UsuarioPerfil modelo(){
+
+	private UsuarioPerfil modelo() {
 		UsuarioPerfil up = new UsuarioPerfil();
 		up.setIdUsuarioPerfil(19);
 		up.setIdUsuario(7);

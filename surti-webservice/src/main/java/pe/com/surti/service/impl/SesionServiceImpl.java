@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import pe.com.surti.common.exception.CustomException;
 import pe.com.surti.dao.PerfilDao;
 import pe.com.surti.dao.UsuarioDao;
-import pe.com.surti.dao.postgres.PostgresPerfilDao;
 import pe.com.surti.entity.Perfil;
 import pe.com.surti.entity.Usuario;
 import pe.com.surti.service.SesionService;

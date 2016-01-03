@@ -16,40 +16,36 @@ import pe.com.surti.entity.Menu;
 
 @Transactional
 @Repository
-public class PostgresMenuDao extends BaseDatoCrudPersistence implements
-		MenuDao {
+public class PostgresMenuDao extends BaseDatoCrudPersistence implements MenuDao {
 
-	private static final Logger logPostgres = Logger.getLogger(PostgresMenuDao.class
-			.getName());
+	private static final Logger logPostgres = Logger
+			.getLogger(PostgresMenuDao.class.getName());
 
 	@Override
 	public List<Menu> obtenerListaMenu() throws CustomException {
-		logPostgres.debug("Inicio");
 		CriteriaQuery<Menu> cq;
 		Root<Menu> root;
-		List<Menu> lm;
+		List<Menu> lista;
 
 		builder = getEm().getCriteriaBuilder();
 		cq = builder.createQuery(Menu.class);
 		root = cq.from(Menu.class);
 		cq.select(root);
-		lm = getEm().createQuery(cq).getResultList();
+		lista = getEm().createQuery(cq).getResultList();
 
-		logPostgres.debug("Satisfactorio: Cantidad = " + lm.size());
-		return lm;
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
+		return lista;
 	}
-
 
 	@Override
 	public Menu obtenerMenuPorId(String idMenu) throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryMenuPorId(idMenu);
 		results = getEm().createNativeQuery(query).getResultList();
 		return formatearEntidad(results);
 	}
-	
+
 	private void queryMenuPorId(String idMenu) {
 		queryBusqueda("idMenu", idMenu);
 	}
@@ -74,12 +70,12 @@ public class PostgresMenuDao extends BaseDatoCrudPersistence implements
 		sql.append(Attribute.Menu.MENU);
 		sql.append(Attribute.Sql.Where);
 		sql.append(Attribute.Menu.M);
-		sql.append(Attribute.Sql.ComillaDoble).append(condicion).
-		append(Attribute.Sql.ComillaDoble);
+		sql.append(Attribute.Sql.ComillaDoble).append(condicion);
+		sql.append(Attribute.Sql.ComillaDoble);
 		sql.append(Attribute.Sql.Igual).append(valor);
 		sql.append(Attribute.Sql.Comilla);
 		query = sql.toString();
-		logPostgres.debug(query);
+		logPostgres.debug("QUERY GENERADO: " + query);
 	}
 
 	private List<Menu> formatearLista(List<Object[]> results) {
@@ -99,9 +95,8 @@ public class PostgresMenuDao extends BaseDatoCrudPersistence implements
 				lista.add(obj);
 			}
 		}
-		logPostgres.debug("Cantidad de registros = " + lista.size());
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
 		return lista;
 	}
-
 
 }

@@ -19,30 +19,28 @@ import pe.com.surti.entity.Perfil;
 public class PostgresPerfilDao extends BaseDatoCrudPersistence implements
 		PerfilDao {
 
-	private final static Logger logPostgres = Logger.getLogger(PostgresPerfilDao.class
-			.getName());
+	private final static Logger logPostgres = Logger
+			.getLogger(PostgresPerfilDao.class.getName());
 
 	@Override
 	public List<Perfil> obtenerListaPerfil() throws CustomException {
-		logPostgres.debug("Inicio");
 		CriteriaQuery<Perfil> cq;
 		Root<Perfil> root;
-		List<Perfil> lp;
+		List<Perfil> lista;
 
 		builder = entityManager.getCriteriaBuilder();
 		cq = builder.createQuery(Perfil.class);
 		root = cq.from(Perfil.class);
 		cq.select(root);
-		lp = getEm().createQuery(cq).getResultList();
+		lista = getEm().createQuery(cq).getResultList();
 
-		logPostgres.debug("Satisfactorio: Cantidad = " + lp.size());
-		return lp;
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
+		return lista;
 	}
 
 	@Override
 	public Perfil obtenerPerfilPorDescripcion(String descripcion)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryPerfilPorDescripcion(descripcion);
@@ -53,7 +51,6 @@ public class PostgresPerfilDao extends BaseDatoCrudPersistence implements
 	@Override
 	public Perfil obtenerPerfilPorAbreviacion(String abreviacion)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryPerfilPorAbreviacion(abreviacion);
@@ -89,7 +86,7 @@ public class PostgresPerfilDao extends BaseDatoCrudPersistence implements
 		sql.append(Attribute.Sql.Igual).append(valor);
 		sql.append(Attribute.Sql.Comilla);
 		query = sql.toString();
-		logPostgres.debug(query);
+		logPostgres.debug("QUERY GENERADO: " + query);
 	}
 
 	private List<Perfil> formatearLista(List<Object[]> results) {
@@ -106,7 +103,7 @@ public class PostgresPerfilDao extends BaseDatoCrudPersistence implements
 				lista.add(perfil);
 			}
 		}
-		logPostgres.debug("Cantidad de registros = " + lista.size());
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
 		return lista;
 	}
 

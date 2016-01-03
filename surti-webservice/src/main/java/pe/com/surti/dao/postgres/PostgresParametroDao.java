@@ -20,7 +20,6 @@ public class PostgresParametroDao extends BaseDatoCrudPersistence implements
 
 	@Override
 	public List<Parametro> listByEstado(String estado) throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryPerfilPorEstado(estado);
@@ -31,7 +30,6 @@ public class PostgresParametroDao extends BaseDatoCrudPersistence implements
 	@Override
 	public Parametro obtenerParametroPorDescripcion(String descripcion)
 			throws CustomException {
-		logPostgres.debug("Inicio");
 		List<Object[]> results;
 
 		queryPerfilPorDescripcion(descripcion);
@@ -67,7 +65,7 @@ public class PostgresParametroDao extends BaseDatoCrudPersistence implements
 		sql.append(Attribute.Sql.Igual).append(valor);
 		sql.append(Attribute.Sql.Comilla);
 		query = sql.toString();
-		logPostgres.debug(query);
+		logPostgres.debug("QUERY GENERADO: " + query);
 	}
 
 	private List<Parametro> formatearLista(List<Object[]> results) {
@@ -84,7 +82,7 @@ public class PostgresParametroDao extends BaseDatoCrudPersistence implements
 				lista.add(obj);
 			}
 		}
-		logPostgres.debug("Cantidad de registros = " + lista.size());
+		logPostgres.debug("SATISFACTORIO: Cantidad = " + lista.size());
 		return lista;
 	}
 

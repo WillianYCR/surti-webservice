@@ -12,28 +12,29 @@ import pe.com.surti.service.ConsultaService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-context.xml")
-public class MenuPostgresTest {
-	private final static Logger log = Logger.getLogger(MenuPostgresTest.class.getName());
-	
+public class PostgresMenuTest {
+	private final static Logger log = Logger.getLogger(PostgresMenuTest.class
+			.getName());
+
 	@Autowired
 	private ConsultaService consultaService;
-	
+
 	@Test
-	public void test(){
+	public void test() {
 		try {
 			obtenerListaMenu();
 			obtenerMenuPorId();
 		} catch (Exception e) {
-			log.error("No se pudo obtner la lista de usuarios: " + e);
+			log.error(e);
 		}
 	}
-	
+
 	private void obtenerListaMenu() throws CustomException {
 		consultaService.obtenerListaMenu();
 	}
-	
+
 	private void obtenerMenuPorId() throws CustomException {
 		consultaService.obtenerMenuPorId("5");
 	}
-	
+
 }

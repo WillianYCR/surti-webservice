@@ -9,16 +9,20 @@ import org.springframework.stereotype.Service;
 import pe.com.surti.common.exception.CustomException;
 import pe.com.surti.dao.MenuDao;
 import pe.com.surti.dao.MenuPerfilDao;
+import pe.com.surti.dao.NotificacionDao;
 import pe.com.surti.dao.OrganizacionDao;
 import pe.com.surti.dao.ParametroDao;
 import pe.com.surti.dao.PerfilDao;
+import pe.com.surti.dao.SesionDao;
 import pe.com.surti.dao.UsuarioDao;
 import pe.com.surti.dao.UsuarioPerfilDao;
 import pe.com.surti.entity.Menu;
 import pe.com.surti.entity.MenuPerfil;
+import pe.com.surti.entity.Notificacion;
 import pe.com.surti.entity.Organizacion;
 import pe.com.surti.entity.Parametro;
 import pe.com.surti.entity.Perfil;
+import pe.com.surti.entity.Sesion;
 import pe.com.surti.entity.Usuario;
 import pe.com.surti.entity.UsuarioPerfil;
 import pe.com.surti.service.ConsultaService;
@@ -33,7 +37,7 @@ public class EntidadConsultaService implements ConsultaService {
 
 	@Autowired
 	private UsuarioDao usuarioDao;
-	
+
 	@Autowired
 	private UsuarioPerfilDao usuarioPerfilDao;
 
@@ -42,13 +46,19 @@ public class EntidadConsultaService implements ConsultaService {
 
 	@Autowired
 	private OrganizacionDao organizacionDao;
-	
+
 	@Autowired
 	private MenuDao menuDao;
-	
+
+	@Autowired
+	private SesionDao sesionDao;
+
+	@Autowired
+	private NotificacionDao notificacionDao;
+
 	@Autowired
 	private MenuPerfilDao menuPerfilDao;
-	
+
 	@Override
 	public List<Perfil> obtenerListaPerfil() throws CustomException {
 		List<Perfil> lista = perfilDao.obtenerListaPerfil();
@@ -74,9 +84,9 @@ public class EntidadConsultaService implements ConsultaService {
 
 	@Override
 	public List<Parametro> listByEstado(String estado) throws CustomException {
-		List<Parametro> listaParametro = parametroDao.listByEstado(estado);
-		log.info(listaParametro);
-		return listaParametro;
+		List<Parametro> lista = parametroDao.listByEstado(estado);
+		log.info(lista);
+		return lista;
 	}
 
 	@Override
@@ -88,9 +98,8 @@ public class EntidadConsultaService implements ConsultaService {
 		return objeto;
 	}
 
-	
-	//Procesos para usuario
-	
+	// Procesos para usuario
+
 	@Override
 	public Usuario insertarUsuario(Usuario usuario) throws CustomException {
 		usuario = usuarioDao.insertarUsuario(usuario);
@@ -127,8 +136,8 @@ public class EntidadConsultaService implements ConsultaService {
 		log.debug(objeto);
 		return objeto;
 	}
-	
-	//Procesos para usuarioPerfil
+
+	// Procesos para usuarioPerfil
 
 	@Override
 	public UsuarioPerfil insertarUsuarioPerfil(UsuarioPerfil usuarioPerfil)
@@ -148,7 +157,8 @@ public class EntidadConsultaService implements ConsultaService {
 	@Override
 	public List<UsuarioPerfil> obtenerListaUsuarioPerfil()
 			throws CustomException {
-		List<UsuarioPerfil> lista = usuarioPerfilDao.obtenerListaUsuarioPerfil();
+		List<UsuarioPerfil> lista = usuarioPerfilDao
+				.obtenerListaUsuarioPerfil();
 		log.debug(lista);
 		return lista;
 	}
@@ -156,7 +166,8 @@ public class EntidadConsultaService implements ConsultaService {
 	@Override
 	public List<UsuarioPerfil> obtenerListaUsuarioPerfilPorIdUsuario(
 			String idUsuario) throws CustomException {
-		List<UsuarioPerfil> lista = usuarioPerfilDao.obtenerListaUsuarioPerfilPorIdUsuario(idUsuario);
+		List<UsuarioPerfil> lista = usuarioPerfilDao
+				.obtenerListaUsuarioPerfilPorIdUsuario(idUsuario);
 		log.debug(lista);
 		return lista;
 	}
@@ -164,7 +175,8 @@ public class EntidadConsultaService implements ConsultaService {
 	@Override
 	public List<UsuarioPerfil> obtenerListaUsuarioPerfilPorIdPerfil(
 			String idPerfil) throws CustomException {
-		List<UsuarioPerfil> lista = usuarioPerfilDao.obtenerListaUsuarioPerfilPorIdPerfil(idPerfil);
+		List<UsuarioPerfil> lista = usuarioPerfilDao
+				.obtenerListaUsuarioPerfilPorIdPerfil(idPerfil);
 		log.debug(lista);
 		return lista;
 	}
@@ -172,13 +184,14 @@ public class EntidadConsultaService implements ConsultaService {
 	@Override
 	public UsuarioPerfil obtenerUsuarioPerfilPorId(String idUsuarioPerfil)
 			throws CustomException {
-		UsuarioPerfil objeto = usuarioPerfilDao.obtenerUsuarioPerfilPorId(idUsuarioPerfil);
+		UsuarioPerfil objeto = usuarioPerfilDao
+				.obtenerUsuarioPerfilPorId(idUsuarioPerfil);
 		log.debug(objeto);
 		return objeto;
 	}
 
-	//Proceso para organizacion
-	
+	// Proceso para organizacion
+
 	@Override
 	public Organizacion insertarOrganizacion(Organizacion organizacion)
 			throws CustomException {
@@ -204,12 +217,13 @@ public class EntidadConsultaService implements ConsultaService {
 	@Override
 	public Organizacion obtenerOrganizacionPorId(String idOrganizacion)
 			throws CustomException {
-		Organizacion objeto = organizacionDao.obtenerOrganizacionPorId(idOrganizacion);
+		Organizacion objeto = organizacionDao
+				.obtenerOrganizacionPorId(idOrganizacion);
 		log.debug(objeto);
 		return objeto;
 	}
-	
-	//Proceso para Menu
+
+	// Proceso para Menu
 
 	@Override
 	public List<Menu> obtenerListaMenu() throws CustomException {
@@ -224,8 +238,8 @@ public class EntidadConsultaService implements ConsultaService {
 		log.debug(objeto);
 		return objeto;
 	}
-	
-	//Proceso para Memu Perfil
+
+	// Proceso para Memu Perfil
 
 	@Override
 	public List<MenuPerfil> obtenerListaMenuPerfil() throws CustomException {
@@ -242,6 +256,74 @@ public class EntidadConsultaService implements ConsultaService {
 		return objeto;
 	}
 
-	
-	
+	// Proceso para Sesion
+
+	@Override
+	public Sesion insertarSesion(Sesion sesion) throws CustomException {
+		sesion = sesionDao.insertarSesion(sesion);
+		log.debug(sesion);
+		return sesion;
+	}
+
+	@Override
+	public Sesion modificarSesion(Sesion sesion) throws CustomException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sesion> obtenerListaSesion() throws CustomException {
+		List<Sesion> lista = sesionDao.obtenerListaSesion();
+		log.debug(lista);
+		return lista;
+	}
+
+	@Override
+	public Sesion obtenerSesionPorIdUsuario(String idUsuario)
+			throws CustomException {
+		Sesion objeto = sesionDao.obtenerSesionPorIdUsuario(idUsuario);
+		log.debug(objeto);
+		return objeto;
+	}
+
+	@Override
+	public Sesion obtenerSesionPorId(String idSesion) throws CustomException {
+		Sesion objeto = sesionDao.obtenerSesionPorId(idSesion);
+		log.debug(objeto);
+		return objeto;
+	}
+
+	// Proceso de notificacion
+
+	@Override
+	public Notificacion insertarNotificacion(Notificacion notificacion)
+			throws CustomException {
+		notificacion = notificacionDao.insertarNotificacion(notificacion);
+		log.debug(notificacion);
+		return notificacion;
+	}
+
+	@Override
+	public Notificacion modificarNotificacion(Notificacion notificacion)
+			throws CustomException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Notificacion> obtenerListaNotificacion() throws CustomException {
+		List<Notificacion> lista = notificacionDao.obtenerListaNotificacion();
+		log.debug(lista);
+		return lista;
+	}
+
+	@Override
+	public Notificacion obtenerNotificacionPorId(String idNotificacion)
+			throws CustomException {
+		Notificacion objeto = notificacionDao
+				.obtenerNotificacionPorId(idNotificacion);
+		log.debug(objeto);
+		return objeto;
+	}
+
 }

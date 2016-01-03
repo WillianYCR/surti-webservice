@@ -6,9 +6,9 @@ import pe.com.surti.common.exception.CustomException;
 import pe.com.surti.entity.Usuario;
 
 public interface UsuarioDao {
-	
+
 	Usuario insertarUsuario(Usuario usuario) throws CustomException;
-	
+
 	Usuario modificarUsuario(Usuario usuario) throws CustomException;
 
 	List<Usuario> obtenerListaUsuario() throws CustomException;
